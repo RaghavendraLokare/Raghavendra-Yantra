@@ -23,5 +23,5 @@ jobs:
 
       - name: Add AWS Remote & Push
         run: |
-          git remote add aws https://git-codecommit.ap-southeast-2.amazonaws.com/v1/repos/yantra-app
+          git remote add aws https://git-codecommit.ap-southeast-2.amazonaws.com/v1/repos/raghu
           git push aws HEAD:${GITHUB_REF_NAME}
