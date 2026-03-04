@@ -13,10 +13,15 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Push branch to CodeCommit
+      - name: Configure Git Credentials
+        run: |
+          git config --global credential.helper store
+          echo "https://${AWS_USERNAME}:${AWS_PASSWORD}@git-codecommit.ap-southeast-2.amazonaws.com" > ~/.git-credentials
         env:
           AWS_USERNAME: ${{ secrets.AWS_USERNAME }}
           AWS_PASSWORD: ${{ secrets.AWS_PASSWORD }}
+
+      - name: Add AWS Remote & Push
         run: |
-          git remote add aws https://${AWS_USERNAME}:${AWS_PASSWORD}@git-codecommit.ap-southeast-2.amazonaws.com/v1/repos/raghu
+          git remote add aws https://git-codecommit.ap-southeast-2.amazonaws.com/v1/repos/yantra-app
           git push aws HEAD:${GITHUB_REF_NAME}
